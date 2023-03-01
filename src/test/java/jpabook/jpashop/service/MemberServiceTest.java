@@ -44,7 +44,7 @@ public class MemberServiceTest {
         //when
         memberService.join(member1);
         try {
-            memberService.join(member2); //예외가 발생해야 한다!!!
+            memberService.join(member2); //예외가 발생해야 한다!!! 커밋 테스트
         } catch (IllegalStateException e) {
             return;
         }
