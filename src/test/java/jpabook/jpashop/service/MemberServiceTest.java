@@ -24,7 +24,6 @@ public class MemberServiceTest {
     @Autowired EntityManager em;
 
     @Test
-    @Rollback(false)
     public void 회원가입() throws Exception {
         //given
         Member member = new Member();
@@ -37,7 +36,7 @@ public class MemberServiceTest {
         assertEquals(member, memberRepository.findOne(saveId));
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void 중복_회원_예외() throws Exception {
         //given
         Member member1 = new Member();
@@ -48,14 +47,9 @@ public class MemberServiceTest {
 
         //when
         memberService.join(member1);
-        try {
-            memberService.join(member2); //예외가 발생해야 한다!!! 커밋 테스트
-        } catch (IllegalStateException e) {
-            return;
-        }
+        memberService.join(member2); //예외가 발생해야 한다!!!
 
-        //then
-        fail("예외가 발생해야 한다.TestTest");
+        fail("예외가 발생해야 한다.");
     }
 
 }
