@@ -6,6 +6,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import jpabook.jpashop.repository.OrderRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 @RunWith(SpringRunner.class)
@@ -47,6 +49,22 @@ public class OrderServiceTest {
         assertEquals("주문한 상품 종류 수가 정확해야 한다.",1, getOrder.getOrderItems().size());
         assertEquals("주문 가격은 가격 * 수량이다.", 10000 * 2, getOrder.getTotalPrice());
         assertEquals("주문 수량만큼 재고가 줄어야 한다.", 8, item.getStockQuantity());
+    }
+
+    @Test(expected = NotEnoughStockException.class)
+    public void 상품주문_재고수량초과() throws Exception {
+        //Given
+        Member member = createMember();
+        Item item = createBook("스프링 부트와 aws로 혼자 구현하는 웹 서비스", 10000, 10);//이름, 가격, 재고
+
+        int orderCount = 11;
+
+        //When
+        orderService.order(member.getId(), item.getId(), orderCount);
+
+        //Then
+        fail("재고 수량 부족 예외가 발생해야 한다.");
+
     }
 
     private Member createMember() {
