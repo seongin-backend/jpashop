@@ -71,7 +71,6 @@ public class Order {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
         this.setStatus(OrderStatus.CANCEL);
-
         orderItems.stream().forEach(
             orderItem -> orderItem.cancel()
         );
