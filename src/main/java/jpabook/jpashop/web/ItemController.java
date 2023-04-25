@@ -38,7 +38,7 @@ public class ItemController {
     /**
      * 상품 목록
      * */
-    @GetMapping(value = "/itmes")
+    @GetMapping(value = "/items")
     public String list(Model model) {
         List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
