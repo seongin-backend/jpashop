@@ -12,7 +12,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
-
     private final MemberRepository memberRepository;
 
     /**
@@ -42,5 +41,4 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
-
 }

@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ItemRepository {
-
     private final EntityManager em;
 
     public void save(Item item) {
@@ -28,5 +27,4 @@ public class ItemRepository {
     public List<Item> findAll() {
         return em.createQuery("select i from Item i", Item.class).getResultList();
     }
-
 }

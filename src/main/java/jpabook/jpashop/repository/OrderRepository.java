@@ -1,6 +1,5 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderSearch;
 import org.springframework.stereotype.Repository;
@@ -61,6 +60,5 @@ public class OrderRepository {
         }
 
         return query.getResultList();
-
     }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
 public abstract class Item {
-
     @Id
     @GeneratedValue
     @Column(name = "item_id")
@@ -38,5 +37,4 @@ public abstract class Item {
         }
         this.stockQuantity = restStock;
     }
-
 }
